@@ -71,6 +71,9 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       simpleclip
                                       evil-goggles
+                                      flycheck-phpstan
+                                      yasnippet
+                                      yasnippet-snippets
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -575,13 +578,12 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-to-list 'default-frame-alist '(undecorated-round . t))
-  (setq-default mode-line-format nil)
-
+  (load-file (concat dotspacemacs-directory "configs/theme-config.el"))
   (load-file (concat dotspacemacs-directory "configs/clipboard-config.el"))
   (load-file (concat dotspacemacs-directory "configs/evil-config.el"))
   (load-file (concat dotspacemacs-directory "configs/projectile-config.el"))
   (load-file (concat dotspacemacs-directory "configs/dap-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/php-config.el"))
   )
 
 

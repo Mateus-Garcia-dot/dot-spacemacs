@@ -1,5 +1,3 @@
-;; Evil mode customizations
-
 (with-eval-after-load 'evil
   (define-key evil-normal-state-map (kbd "+") (kbd "\"+"))
   (define-key evil-visual-state-map (kbd "+") (kbd "\"+"))
