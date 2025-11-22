@@ -1,0 +1,3 @@
+[submodule "packages/evil-quickscope"]
+	path = packages/evil-quickscope
+	url = git@github.com:blorbx/evil-quickscope.git

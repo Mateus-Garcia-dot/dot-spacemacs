@@ -39,11 +39,14 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; auto-completion
+     dap
      better-defaults
      themes-megapack
      emacs-lisp
      ;; git
-     helm
+     (ivy :variables
+          ivy-case-fold-search-always t
+          )
      ;; lsp
      ;; markdown
      multiple-cursors
@@ -65,7 +68,10 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      simpleclip
+                                      evil-goggles
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -571,6 +577,11 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (add-to-list 'default-frame-alist '(undecorated-round . t))
   (setq-default mode-line-format nil)
+
+  (load-file (concat dotspacemacs-directory "configs/clipboard-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/evil-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/projectile-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/dap-config.el"))
   )
 
 
