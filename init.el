@@ -39,11 +39,14 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; auto-completion
+     (llm-client :variables
+                 llm-client-enable-gptel t
+                 )
      dap
      better-defaults
      themes-megapack
      emacs-lisp
-     ;; git
+     git
      (ivy :variables
           ivy-case-fold-search-always t
           )
@@ -74,6 +77,7 @@ This function should only modify configuration layer settings."
                                       flycheck-phpstan
                                       yasnippet
                                       yasnippet-snippets
+                                      jinx
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -584,83 +588,84 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/projectile-config.el"))
   (load-file (concat dotspacemacs-directory "configs/dap-config.el"))
   (load-file (concat dotspacemacs-directory "configs/php-config.el"))
-  )
+  (load-file (concat dotspacemacs-directory "configs/spellchecker-config.el"))
+             )
 
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
+  ;; Do not write anything past this comment. This is where Emacs will
+  ;; auto-generate custom variable definitions.
+  (defun dotspacemacs/emacs-custom-settings ()
+    "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(custom-safe-themes
-     '("95b51aab1acd95ebcc7f47a60dd02d1a6b4b2c4aa68027b6d4138c2f70c583ae" default))
-   '(package-selected-packages
-     '(ace-link add-node-modules-path afternoon-theme aggressive-indent alect-themes
-                all-the-icons ample-theme ample-zen-theme anti-zenburn-theme
-                apropospriate-theme auto-compile auto-highlight-symbol
-                avy-jump-helm-line badwolf-theme birds-of-paradise-plus-theme
-                bubbleberry-theme busybee-theme centered-cursor-mode
-                cherry-blossom-theme chocolate-theme clean-aindent-mode
-                clues-theme color-theme-sanityinc-solarized
-                color-theme-sanityinc-tomorrow column-enforce-mode company
-                cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme
-                darktooth-theme define-word devdocs diminish dired-quick-sort
-                disable-mouse django-theme doom-themes dotenv-mode dracula-theme
-                drag-stuff dumb-jump ef-themes elisp-def elisp-demos
-                elisp-slime-nav emmet-mode emr espresso-theme eval-sexp-fu
-                evil-anzu evil-args evil-cleverparens evil-collection
-                evil-easymotion evil-escape evil-evilified-state evil-exchange
-                evil-goggles evil-iedit-state evil-indent-plus evil-lion
-                evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
-                evil-numbers evil-surround evil-textobj-line evil-tutor
-                evil-unimpaired evil-visual-mark-mode evil-visualstar
-                exotica-theme expand-region eyebrowse eziam-themes fancy-battery
-                farmhouse-themes flatland-theme flatui-theme flycheck
-                gandalf-theme golden-ratio google-translate gotham-theme
-                grandshell-theme grizzl gruber-darker-theme gruvbox-theme
-                hc-zenburn-theme helm-ag helm-comint helm-descbinds helm-make
-                helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop
-                helm-xref hemisu-theme heroku-theme hide-comnt
-                highlight-indentation highlight-numbers highlight-parentheses
-                hl-todo holy-mode hungry-delete hybrid-mode import-js indent-guide
-                info+ inkpot-theme inspector ir-black-theme jazz-theme
-                jbeans-theme json-mode json-navigator json-reformat json-snatcher
-                kaolin-themes light-soap-theme link-hint lorem-ipsum lush-theme
-                macrostep madhat2r-theme material-theme minimal-theme moe-theme
-                molokai-theme monochrome-theme monokai-theme multi-line
-                mustang-theme mwim nameless naquadah-theme noctilux-theme npm-mode
-                obsidian-theme occidental-theme oldlace-theme
-                omtose-phellack-themes open-junk-file org-superstar
-                organic-green-theme overseer page-break-lines paradox
-                password-generator pcre2el phoenix-dark-mono-theme
-                phoenix-dark-pink-theme planet-theme popwin professional-theme
-                purple-haze-theme quickrun railscasts-theme rainbow-delimiters
-                rebecca-theme restart-emacs reverse-theme seti-theme smyx-theme
-                soft-charcoal-theme soft-morning-theme soft-stone-theme
-                solarized-theme soothe-theme space-doc spacegray-theme
-                spacemacs-purpose-popwin spacemacs-whitespace-cleanup
-                string-edit-at-point string-inflection subatomic-theme
-                subatomic256-theme sublime-themes sunny-day-theme symbol-overlay
-                symon tango-2-theme tango-plus-theme tangotango-theme tao-theme
-                term-cursor tide toc-org toxi-theme treemacs-evil
-                treemacs-icons-dired treemacs-persp treemacs-projectile
-                twilight-anti-bright-theme twilight-bright-theme twilight-theme
-                typescript-mode ujelly-theme underwater-theme undo-fu
-                undo-fu-session unfill uuidgen vi-tilde-fringe volatile-highlights
-                vundo web-beautify web-mode wgrep white-sand-theme winum
-                writeroom-mode ws-butler yasnippet zen-and-art-theme zenburn-theme
-                zonokai-emacs)))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(default ((t (:background nil)))))
-  )
+    (custom-set-variables
+     ;; custom-set-variables was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(custom-safe-themes
+       '("95b51aab1acd95ebcc7f47a60dd02d1a6b4b2c4aa68027b6d4138c2f70c583ae" default))
+     '(package-selected-packages
+       '(ace-link add-node-modules-path afternoon-theme aggressive-indent alect-themes
+                  all-the-icons ample-theme ample-zen-theme anti-zenburn-theme
+                  apropospriate-theme auto-compile auto-highlight-symbol
+                  avy-jump-helm-line badwolf-theme birds-of-paradise-plus-theme
+                  bubbleberry-theme busybee-theme centered-cursor-mode
+                  cherry-blossom-theme chocolate-theme clean-aindent-mode
+                  clues-theme color-theme-sanityinc-solarized
+                  color-theme-sanityinc-tomorrow column-enforce-mode company
+                  cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme
+                  darktooth-theme define-word devdocs diminish dired-quick-sort
+                  disable-mouse django-theme doom-themes dotenv-mode dracula-theme
+                  drag-stuff dumb-jump ef-themes elisp-def elisp-demos
+                  elisp-slime-nav emmet-mode emr espresso-theme eval-sexp-fu
+                  evil-anzu evil-args evil-cleverparens evil-collection
+                  evil-easymotion evil-escape evil-evilified-state evil-exchange
+                  evil-goggles evil-iedit-state evil-indent-plus evil-lion
+                  evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
+                  evil-numbers evil-surround evil-textobj-line evil-tutor
+                  evil-unimpaired evil-visual-mark-mode evil-visualstar
+                  exotica-theme expand-region eyebrowse eziam-themes fancy-battery
+                  farmhouse-themes flatland-theme flatui-theme flycheck
+                  gandalf-theme golden-ratio google-translate gotham-theme
+                  grandshell-theme grizzl gruber-darker-theme gruvbox-theme
+                  hc-zenburn-theme helm-ag helm-comint helm-descbinds helm-make
+                  helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop
+                  helm-xref hemisu-theme heroku-theme hide-comnt
+                  highlight-indentation highlight-numbers highlight-parentheses
+                  hl-todo holy-mode hungry-delete hybrid-mode import-js indent-guide
+                  info+ inkpot-theme inspector ir-black-theme jazz-theme
+                  jbeans-theme json-mode json-navigator json-reformat json-snatcher
+                  kaolin-themes light-soap-theme link-hint lorem-ipsum lush-theme
+                  macrostep madhat2r-theme material-theme minimal-theme moe-theme
+                  molokai-theme monochrome-theme monokai-theme multi-line
+                  mustang-theme mwim nameless naquadah-theme noctilux-theme npm-mode
+                  obsidian-theme occidental-theme oldlace-theme
+                  omtose-phellack-themes open-junk-file org-superstar
+                  organic-green-theme overseer page-break-lines paradox
+                  password-generator pcre2el phoenix-dark-mono-theme
+                  phoenix-dark-pink-theme planet-theme popwin professional-theme
+                  purple-haze-theme quickrun railscasts-theme rainbow-delimiters
+                  rebecca-theme restart-emacs reverse-theme seti-theme smyx-theme
+                  soft-charcoal-theme soft-morning-theme soft-stone-theme
+                  solarized-theme soothe-theme space-doc spacegray-theme
+                  spacemacs-purpose-popwin spacemacs-whitespace-cleanup
+                  string-edit-at-point string-inflection subatomic-theme
+                  subatomic256-theme sublime-themes sunny-day-theme symbol-overlay
+                  symon tango-2-theme tango-plus-theme tangotango-theme tao-theme
+                  term-cursor tide toc-org toxi-theme treemacs-evil
+                  treemacs-icons-dired treemacs-persp treemacs-projectile
+                  twilight-anti-bright-theme twilight-bright-theme twilight-theme
+                  typescript-mode ujelly-theme underwater-theme undo-fu
+                  undo-fu-session unfill uuidgen vi-tilde-fringe volatile-highlights
+                  vundo web-beautify web-mode wgrep white-sand-theme winum
+                  writeroom-mode ws-butler yasnippet zen-and-art-theme zenburn-theme
+                  zonokai-emacs)))
+    (custom-set-faces
+     ;; custom-set-faces was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(default ((t (:background nil)))))
+    )
