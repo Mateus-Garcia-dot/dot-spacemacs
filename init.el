@@ -32,13 +32,19 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
+   '((typescript
+      :variables
+      typescript-backend 'tide
+      typescript-lsp-linter nil)
+
+     (javascript :variables
+                 javascript-backend 'lsp)
+
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
      (llm-client :variables
                  llm-client-enable-gptel t
                  )
@@ -59,14 +65,23 @@ This function should only modify configuration layer settings."
           lsp-intelephense-format-braces "k&r"
           )
      ;; markdown
-     multiple-cursors
+     ;; multiple-cursors
      org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; syntax-checking
      ;; version-control
-     treemacs)
+     (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-use-company-posframe t
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-idle-delay 0.0
+                      :config
+                      add-to-list 'company-backends '(company-yasnippet company-capf company-anaconda))
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
