@@ -1,6 +1,9 @@
 (setq vterm-timer-delay 0.01)
-(evil-define-key 'insert vterm-mode-map (kbd "C-c") #'vterm--self-insert)
-(evil-define-key 'normal vterm-mode-map (kbd "C-c") #'vterm--self-insert)
+
+(with-eval-after-load 'vterm
+  (evil-set-initial-state 'vterm-mode 'emacs)
+  (setq vterm-keymap-exceptions '("C-x" "C-g" "C-h" "M-x" "M-o" "C-u"))
+  (define-key vterm-mode-map (kbd "C-c") #'vterm-send-C-c))
 
 (define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd)
 
