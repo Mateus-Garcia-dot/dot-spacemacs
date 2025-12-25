@@ -6,8 +6,12 @@
 
 (spacemacs/set-leader-keys "S s" 'jinx-correct)
 
+
 (with-eval-after-load 'jinx
-  (add-to-list 'jinx-camel-modes 'php-mode))
+  (add-to-list 'jinx-camel-modes 'php-mode)
+  (set-face-attribute 'jinx-misspelled nil
+                      :underline '(:style line :color "#5c6773"))
+  )
 
 (with-eval-after-load 'jinx
   (setq jinx-include-faces

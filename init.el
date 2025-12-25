@@ -59,6 +59,8 @@ This function should only modify configuration layer settings."
      (llm-client :variables
                  llm-client-enable-gptel t
                  )
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t)
      dap
      better-defaults
      themes-megapack
@@ -87,6 +89,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; version-control
+
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t
@@ -128,13 +131,16 @@ This function should only modify configuration layer settings."
                                                   :fetcher github
                                                   :repo "jixiuf/vterm-toggle"
                                                   ))
+                                      spacious-padding
                                       )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(
+                                    vi-tilde-fringe
+                                    )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -644,6 +650,7 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/spellchecker-config.el"))
   (load-file (concat dotspacemacs-directory "configs/llm-config.el"))
   (load-file (concat dotspacemacs-directory "configs/shell-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/dired-config.el"))
   (setq epg-gpg-program "/opt/homebrew/bin/gpg")
   (setq epa-file-encrypt-to "mateusm.garcia0@gmail.com")
   (setq epa-pinentry-mode 'loopback)
