@@ -4,6 +4,8 @@
 
 (defun dotspacemacs/layers ()
   "Layer configuration:
+
+
 This function should only modify configuration layer settings."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
@@ -32,7 +34,15 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '((typescript
+   '(
+     (python
+      :variables
+      python-backend 'lsp
+      python-pipenv-activate t
+      )
+     docker
+     yaml
+     (typescript
       :variables
       typescript-backend 'tide
       typescript-lsp-linter nil)
@@ -53,20 +63,25 @@ This function should only modify configuration layer settings."
      themes-megapack
      emacs-lisp
      git
+     (tree-sitter :variables tree-sitter-syntax-highlight-enable t)
+     (php :variables php-backend 'lsp)
      (ivy :variables
           ivy-case-fold-search-always t
           )
      (lsp :variables
           lsp-headerline-breadcrumb-enable nil
           lsp-ui-sideline-enable t
-          lsp-ui-sideline-show-diagnostics t
+          lsp-ui-sideline-show-diagnostics nil
           lsp-enable-file-watchers t
           lsp-file-watch-threshold 122880
           lsp-intelephense-format-braces "k&r"
           )
+     (elixir :variables elixir-backend 'lsp
+             elixir-ls-path "~/lsp/elixir-ls"
+             )
+     org
      ;; markdown
      ;; multiple-cursors
-     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -99,6 +114,7 @@ This function should only modify configuration layer settings."
                                       yasnippet
                                       yasnippet-snippets
                                       jinx
+                                      gptel-commit
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -266,8 +282,8 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13.0
+   dotspacemacs-default-font '("JetBrainsMono Nerd Font Mono"
+                               :size 12.0
                                :weight normal
                                :width normal)
 
@@ -398,7 +414,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
    ;; without external boxes. Also disables the internal border. (default nil)
-   dotspacemacs-undecorated-at-startup nil
+   dotspacemacs-undecorated-at-startup t
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -603,6 +619,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
   (load-file (concat dotspacemacs-directory "configs/theme-config.el"))
   (load-file (concat dotspacemacs-directory "configs/clipboard-config.el"))
   (load-file (concat dotspacemacs-directory "configs/evil-config.el"))
@@ -610,6 +629,10 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/dap-config.el"))
   (load-file (concat dotspacemacs-directory "configs/php-config.el"))
   (load-file (concat dotspacemacs-directory "configs/spellchecker-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/llm-config.el"))
+  (setq epg-gpg-program "/opt/homebrew/bin/gpg")
+  (setq epa-file-encrypt-to "mateusm.garcia0@gmail.com")
+  (setq epa-pinentry-mode 'loopback)
   )
 
 
@@ -620,73 +643,4 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(custom-safe-themes
-     '("95b51aab1acd95ebcc7f47a60dd02d1a6b4b2c4aa68027b6d4138c2f70c583ae" default))
-   '(package-selected-packages
-     '(ace-link add-node-modules-path afternoon-theme aggressive-indent alect-themes
-                all-the-icons ample-theme ample-zen-theme anti-zenburn-theme
-                apropospriate-theme auto-compile auto-highlight-symbol
-                avy-jump-helm-line badwolf-theme birds-of-paradise-plus-theme
-                bubbleberry-theme busybee-theme centered-cursor-mode
-                cherry-blossom-theme chocolate-theme clean-aindent-mode
-                clues-theme color-theme-sanityinc-solarized
-                color-theme-sanityinc-tomorrow column-enforce-mode company
-                cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme
-                darktooth-theme define-word devdocs diminish dired-quick-sort
-                disable-mouse django-theme doom-themes dotenv-mode dracula-theme
-                drag-stuff dumb-jump ef-themes elisp-def elisp-demos
-                elisp-slime-nav emmet-mode emr espresso-theme eval-sexp-fu
-                evil-anzu evil-args evil-cleverparens evil-collection
-                evil-easymotion evil-escape evil-evilified-state evil-exchange
-                evil-goggles evil-iedit-state evil-indent-plus evil-lion
-                evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
-                evil-numbers evil-surround evil-textobj-line evil-tutor
-                evil-unimpaired evil-visual-mark-mode evil-visualstar
-                exotica-theme expand-region eyebrowse eziam-themes fancy-battery
-                farmhouse-themes flatland-theme flatui-theme flycheck
-                gandalf-theme golden-ratio google-translate gotham-theme
-                grandshell-theme grizzl gruber-darker-theme gruvbox-theme
-                hc-zenburn-theme helm-ag helm-comint helm-descbinds helm-make
-                helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop
-                helm-xref hemisu-theme heroku-theme hide-comnt
-                highlight-indentation highlight-numbers highlight-parentheses
-                hl-todo holy-mode hungry-delete hybrid-mode import-js indent-guide
-                info+ inkpot-theme inspector ir-black-theme jazz-theme
-                jbeans-theme json-mode json-navigator json-reformat json-snatcher
-                kaolin-themes light-soap-theme link-hint lorem-ipsum lush-theme
-                macrostep madhat2r-theme material-theme minimal-theme moe-theme
-                molokai-theme monochrome-theme monokai-theme multi-line
-                mustang-theme mwim nameless naquadah-theme noctilux-theme npm-mode
-                obsidian-theme occidental-theme oldlace-theme
-                omtose-phellack-themes open-junk-file org-superstar
-                organic-green-theme overseer page-break-lines paradox
-                password-generator pcre2el phoenix-dark-mono-theme
-                phoenix-dark-pink-theme planet-theme popwin professional-theme
-                purple-haze-theme quickrun railscasts-theme rainbow-delimiters
-                rebecca-theme restart-emacs reverse-theme seti-theme smyx-theme
-                soft-charcoal-theme soft-morning-theme soft-stone-theme
-                solarized-theme soothe-theme space-doc spacegray-theme
-                spacemacs-purpose-popwin spacemacs-whitespace-cleanup
-                string-edit-at-point string-inflection subatomic-theme
-                subatomic256-theme sublime-themes sunny-day-theme symbol-overlay
-                symon tango-2-theme tango-plus-theme tangotango-theme tao-theme
-                term-cursor tide toc-org toxi-theme treemacs-evil
-                treemacs-icons-dired treemacs-persp treemacs-projectile
-                twilight-anti-bright-theme twilight-bright-theme twilight-theme
-                typescript-mode ujelly-theme underwater-theme undo-fu
-                undo-fu-session unfill uuidgen vi-tilde-fringe volatile-highlights
-                vundo web-beautify web-mode wgrep white-sand-theme winum
-                writeroom-mode ws-butler yasnippet zen-and-art-theme zenburn-theme
-                zonokai-emacs)))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(default ((t (:background nil)))))
   )

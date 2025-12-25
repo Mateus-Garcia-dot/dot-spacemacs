@@ -4,6 +4,9 @@
   )
 
 (load-file (concat dotspacemacs-directory "packages/evil-quickscope/evil-quickscope.el"))
+
+(add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
 (require 'evil-quickscope)
 (add-hook 'prog-mode-hook 'turn-on-evil-quickscope-always-mode)
 (global-evil-quickscope-always-mode 1)
