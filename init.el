@@ -115,6 +115,12 @@ This function should only modify configuration layer settings."
                                       yasnippet-snippets
                                       jinx
                                       gptel-commit
+                                      (evil-quickscope
+                                       :location (
+                                                  recipe
+                                                  :fetcher github
+                                                  :repo "blorbx/evil-quickscope"
+                                                  ))
                                       )
 
    ;; A list of packages that cannot be updated.

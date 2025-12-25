@@ -3,13 +3,11 @@
   (define-key evil-visual-state-map (kbd "+") (kbd "\"+"))
   )
 
-(load-file (concat dotspacemacs-directory "packages/evil-quickscope/evil-quickscope.el"))
+(use-package evil-quickscope
+  :config
+  (global-evil-quickscope-always-mode 1))
 
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-
-(require 'evil-quickscope)
-(add-hook 'prog-mode-hook 'turn-on-evil-quickscope-always-mode)
-(global-evil-quickscope-always-mode 1)
 
 (require 'evil-goggles)
 (evil-goggles-mode)
