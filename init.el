@@ -42,6 +42,7 @@ This function should only modify configuration layer settings."
       )
      docker
      yaml
+     (shell :variables shell-default-shell 'vterm)
      (typescript
       :variables
       typescript-backend 'tide
@@ -120,6 +121,12 @@ This function should only modify configuration layer settings."
                                                   recipe
                                                   :fetcher github
                                                   :repo "blorbx/evil-quickscope"
+                                                  ))
+                                      (vterm-toggle
+                                       :location (
+                                                  recipe
+                                                  :fetcher github
+                                                  :repo "jixiuf/vterm-toggle"
                                                   ))
                                       )
 
@@ -636,6 +643,7 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/php-config.el"))
   (load-file (concat dotspacemacs-directory "configs/spellchecker-config.el"))
   (load-file (concat dotspacemacs-directory "configs/llm-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/shell-config.el"))
   (setq epg-gpg-program "/opt/homebrew/bin/gpg")
   (setq epa-file-encrypt-to "mateusm.garcia0@gmail.com")
   (setq epa-pinentry-mode 'loopback)
