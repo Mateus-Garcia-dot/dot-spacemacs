@@ -12,5 +12,13 @@
   (evil-define-key 'emacs vterm-mode-map (kbd "C-c") #'vterm-send-C-c)
   (define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd))
 
+(add-hook 'vterm-copy-mode-hook
+          (lambda ()
+            (if vterm-copy-mode
+                (evil-normal-state)
+              (evil-emacs-state))))
+
+(setq vterm-toggle-scope 'project)
+
 (spacemacs/set-leader-keys
   "'" 'vterm-toggle)
