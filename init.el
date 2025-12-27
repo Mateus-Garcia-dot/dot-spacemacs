@@ -645,6 +645,7 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/llm-config.el"))
   (load-file (concat dotspacemacs-directory "configs/shell-config.el"))
   (load-file (concat dotspacemacs-directory "configs/dired-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/org-config.el"))
   (setq epg-gpg-program "/opt/homebrew/bin/gpg")
   (setq epa-file-encrypt-to "mateusm.garcia0@gmail.com")
   (setq epa-pinentry-mode 'loopback)
