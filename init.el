@@ -49,7 +49,11 @@ This function should only modify configuration layer settings."
       typescript-lsp-linter nil)
 
      (javascript :variables
-                 javascript-backend 'lsp)
+                 javascript-backend 'lsp
+                 javascript-lsp-linter nil)
+     (typescript :variables
+                 typescript-backend 'lsp
+                 typescript-lsp-linter nil)
 
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -78,6 +82,7 @@ This function should only modify configuration layer settings."
           lsp-enable-file-watchers t
           lsp-file-watch-threshold 122880
           lsp-intelephense-format-braces "k&r"
+          lsp-disabled-clients '(deno-ls)
           )
      (elixir :variables elixir-backend 'lsp
              elixir-ls-path "~/lsp/elixir-ls"
@@ -635,7 +640,6 @@ before packages are loaded."
   (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
   (when (file-exists-p custom-file)
     (load custom-file))
-  (load-file (concat dotspacemacs-directory "configs/theme-config.el"))
   (load-file (concat dotspacemacs-directory "configs/clipboard-config.el"))
   (load-file (concat dotspacemacs-directory "configs/evil-config.el"))
   (load-file (concat dotspacemacs-directory "configs/projectile-config.el"))
@@ -646,6 +650,7 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/shell-config.el"))
   (load-file (concat dotspacemacs-directory "configs/dired-config.el"))
   (load-file (concat dotspacemacs-directory "configs/org-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/theme-config.el"))
   (setq epg-gpg-program "/opt/homebrew/bin/gpg")
   (setq epa-file-encrypt-to "mateusm.garcia0@gmail.com")
   (setq epa-pinentry-mode 'loopback)
