@@ -125,12 +125,6 @@ This function should only modify configuration layer settings."
                                                   :fetcher github
                                                   :repo "blorbx/evil-quickscope"
                                                   ))
-                                      (vterm-toggle
-                                       :location (
-                                                  recipe
-                                                  :fetcher github
-                                                  :repo "jixiuf/vterm-toggle"
-                                                  ))
                                       spacious-padding
                                       )
 
