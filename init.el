@@ -40,6 +40,7 @@ This function should only modify configuration layer settings."
       python-backend 'lsp
       python-pipenv-activate t
       )
+     rust
      docker
      yaml
      (shell :variables shell-default-shell 'vterm)
@@ -537,7 +538,7 @@ It should only modify the values of Spacemacs settings."
    ;; Note that saved undo history does not get transferred when changing
    ;; your undo system. The default is currently `undo-fu' as `undo-tree'
    ;; is not maintained anymore and `undo-redo' is very basic."
-   dotspacemacs-undo-system 'undo-fu
+   dotspacemacs-undo-system 'undo-tree
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
