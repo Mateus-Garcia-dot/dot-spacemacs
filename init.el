@@ -83,7 +83,7 @@ This function should only modify configuration layer settings."
           lsp-enable-file-watchers t
           lsp-file-watch-threshold 122880
           lsp-intelephense-format-braces "k&r"
-          lsp-disabled-clients '(deno-ls)
+          lsp-disabled-clients '(deno-ls iph php-ls)
           )
      (elixir :variables elixir-backend 'lsp
              elixir-ls-path "~/lsp/elixir-ls"
