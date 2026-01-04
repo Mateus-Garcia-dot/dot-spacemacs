@@ -120,7 +120,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       simpleclip
                                       evil-goggles
-                                      flycheck-phpstan
                                       yasnippet
                                       yasnippet-snippets
                                       jinx
