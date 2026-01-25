@@ -124,6 +124,12 @@ This function should only modify configuration layer settings."
                                       yasnippet-snippets
                                       jinx
                                       gptel-commit
+                                      (gptel-watch
+                                       :location (
+                                                  recipe
+                                                  :fetcher github
+                                                  :repo "ISouthRain/gptel-watch"
+                                                  ))
                                       (evil-quickscope
                                        :location (
                                                   recipe
