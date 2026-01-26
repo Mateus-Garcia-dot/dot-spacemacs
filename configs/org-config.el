@@ -1,7 +1,5 @@
 (add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)))
 
-(setq org-modern-star '("›"))
-
 (use-package org-present
   :config
   (setq org-present-text-scale 3)

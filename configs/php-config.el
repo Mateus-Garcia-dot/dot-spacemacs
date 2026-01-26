@@ -1,3 +1,5 @@
+(setq lsp-apply-edits-after-file-operations nil)
+
 (defun my/toggle-class-search ()
   (interactive)
   (let ((class-name nil))

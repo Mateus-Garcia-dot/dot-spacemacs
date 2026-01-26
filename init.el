@@ -88,7 +88,9 @@ This function should only modify configuration layer settings."
      (elixir :variables elixir-backend 'lsp
              elixir-ls-path "~/lsp/elixir-ls"
              )
-     org
+     (org
+      :variables org-enable-modern-support t
+      )
      ;; markdown
      ;; multiple-cursors
      ;; (shell :variables
@@ -104,8 +106,10 @@ This function should only modify configuration layer settings."
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-enable-sort-by-usage t
                       auto-completion-idle-delay 0.0
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-complete-with-key-sequence "jk"
                       :config
-                      add-to-list 'company-backends '(company-yasnippet company-capf company-anaconda))
+                      add-to-list 'company-backends '(company-yasnippet company-capf))
      )
 
 
@@ -120,7 +124,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       simpleclip
                                       evil-goggles
-                                      yasnippet
                                       yasnippet-snippets
                                       jinx
                                       gptel-commit
@@ -137,6 +140,8 @@ This function should only modify configuration layer settings."
                                                   :repo "blorbx/evil-quickscope"
                                                   ))
                                       spacious-padding
+                                      consult-gh
+                                      consult-gh-forge
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -657,6 +662,7 @@ before packages are loaded."
   (load-file (concat dotspacemacs-directory "configs/dired-config.el"))
   (load-file (concat dotspacemacs-directory "configs/org-config.el"))
   (load-file (concat dotspacemacs-directory "configs/theme-config.el"))
+  (load-file (concat dotspacemacs-directory "configs/gh-config.el"))
   (setq epg-gpg-program "/opt/homebrew/bin/gpg")
   (setq epa-file-encrypt-to "mateusm.garcia0@gmail.com")
   (setq epa-pinentry-mode 'loopback)
